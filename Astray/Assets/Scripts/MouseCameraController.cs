@@ -1,9 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MouseCameraController : MonoBehaviour
 {
+    public bool pixelated;
+    public RenderTexture renderTexture;
+    public GameObject rawImage;
     public float smooth;
     public Transform Target;
     public Transform Player;
@@ -32,6 +36,15 @@ public class MouseCameraController : MonoBehaviour
         offset = transform.localPosition;
         dollyDir = transform.localPosition.normalized;
         distance = transform.localPosition.magnitude;
+
+        if (pixelated) {
+            Camera.main.targetTexture = renderTexture;
+            rawImage.SetActive(true);
+        }
+        else {
+            Camera.main.targetTexture = null;
+            rawImage.SetActive(false);
+        }
     }
 
     // Update is called once per frame

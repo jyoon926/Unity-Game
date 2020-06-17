@@ -48,9 +48,13 @@ public class Companion : MonoBehaviour
         if (Physics.CheckSphere(GroundChecker.position, 0.01f, Platform)) {
             Body.AddForce(new Vector3(0, 20f, 0), ForceMode.Impulse);
         }
-
         if (distance > DistanceFromPlayer) {
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
+        }
+    }
+
+    private void FixedUpdate() {
+        if (distance > DistanceFromPlayer) {
             float speed = distance + 2f;
             Vector3 direction = transform.forward.normalized * speed * Time.deltaTime;
             Body.MovePosition(transform.position + direction);
@@ -72,7 +76,7 @@ public class Companion : MonoBehaviour
     }
 
     IEnumerator Jump() {
-        yield return new WaitForSeconds(distance / 10);
+        yield return new WaitForSeconds(distance / 12f);
         if (!jumping)
         {
             if (Body.velocity.y < 0) {
@@ -91,7 +95,7 @@ public class Companion : MonoBehaviour
     }
     IEnumerator InstantJump() {
         Debug.Log("Jump");
-        yield return new WaitForSeconds(distance / 10);
+        yield return new WaitForSeconds(distance / 12f);
         if (Body.velocity.y < 0) {
             Body.AddForce(new Vector3(0, 15f + Body.velocity.magnitude, 0), ForceMode.Impulse);
         }
