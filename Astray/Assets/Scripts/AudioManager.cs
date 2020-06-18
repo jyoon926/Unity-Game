@@ -35,7 +35,8 @@ public class AudioManager : MonoBehaviour
 	}
 
 	private void Start() {
-		Play("Main Theme");
+		if (SceneManager.GetActiveScene().buildIndex == 0)
+			Play("Main Theme");
 	}
 
 	public void Play(string sound)

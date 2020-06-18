@@ -17,15 +17,23 @@ public class Companion : MonoBehaviour
     public Transform WallChecker;
     public LayerMask Ground;
     public LayerMask Platform;
+    public float jumpStrength;
     bool jumping = false;
     private int n;
     public InDialogue playerDialogue;
     AudioSource audioData;
+    private bool platformJump;
+    private float heightOfJump;
+    private float selfHeightOfJump;
+    private float playerJumpDistance;
+    Vector3 previousJumpPosition;
+    Vector3 playerPos;
 
     void Start()
     {
         audioData = GetComponent<AudioSource>();
         audioData.Play(0);
+        platformJump = false;
     }
 
     void Update()
@@ -33,29 +41,52 @@ public class Companion : MonoBehaviour
         isGrounded = Physics.CheckSphere(GroundChecker.position, 0.01f, Ground);
         float targetAngle = Mathf.Atan2(Player.transform.position.z - transform.position.z, Player.transform.position.x - transform.position.x) * 180 / Mathf.PI;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, -1 * targetAngle + 90, ref turnSmoothVelocity, turnSmoothTime);
-        distance = Vector3.Distance(Player.transform.position, transform.position);
+        distance = Vector2.Distance(new Vector2(Player.transform.position.x, Player.transform.position.z), new Vector2(transform.position.x, transform.position.z));
 
-        if (Physics.CheckSphere(WallChecker.position, 0.01f, Ground) && !jumping) {
-            Body.AddForce(new Vector3(0, 15f, 0), ForceMode.Impulse);
-            jumping = true;
-            StartCoroutine(ResetJump());
+        //Jump when detects wall
+        if (Physics.CheckSphere(WallChecker.position, 0.01f, Ground) && isGrounded) {
+            Body.AddForce(new Vector3(0, jumpStrength, 0), ForceMode.Impulse);
+            //StartCoroutine(ResetJump());
         }
 
+        //Jump when player jumps
         if (!playerDialogue.inDialogue && Input.GetButtonDown("Jump") && PlayerController._isGrounded) {
-            StartCoroutine(Jump());
+            StartCoroutine(Jump(Player.transform.position, transform.position));
         }
 
-        if (Physics.CheckSphere(GroundChecker.position, 0.01f, Platform)) {
-            Body.AddForce(new Vector3(0, 20f, 0), ForceMode.Impulse);
-        }
+        //Rotation towards player
         if (distance > DistanceFromPlayer) {
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
         }
+        //Platform Jump
+        if (platformJump) {
+            //if (playerJumpDistance > 3.3f) {
+                if (playerJumpDistance - Vector2.Distance(new Vector2(previousJumpPosition.x, previousJumpPosition.z), new Vector2(transform.position.x, transform.position.z)) < 0f) {
+                    //if ((heightOfJump > selfHeightOfJump && heightOfJump > transform.position.y) || (heightOfJump < selfHeightOfJump && heightOfJump > transform.position.y)) {
+                        Body.AddForce(new Vector3(0, jumpStrength - Body.velocity.y, 0f), ForceMode.Impulse);
+                        //this.GetComponent<Rigidbody>().detectCollisions = false;
+                        previousJumpPosition = transform.position;
+                        platformJump = false;
+                    //}
+                }
+            //}
+            //else {
+            //    if (Vector3.Distance(previousJumpPosition, transform.position) > 3f) {
+            //        Body.AddForce(new Vector3(0, jumpStrength - Body.velocity.y, 0f), ForceMode.Impulse);
+            //        //this.GetComponent<Rigidbody>().detectCollisions = false;
+            //        previousJumpPosition = transform.position;
+            //        platformJump = false;
+            //    }
+            //}
+        }
+        //if (isGrounded || PlayerController._isGrounded)
+            //this.GetComponent<Rigidbody>().detectCollisions = true;
     }
 
     private void FixedUpdate() {
+        //Foundational movement
         if (distance > DistanceFromPlayer) {
-            float speed = distance + 2f;
+            float speed = (distance * 1.2f) + 3f;
             Vector3 direction = transform.forward.normalized * speed * Time.deltaTime;
             Body.MovePosition(transform.position + direction);
             if (isGrounded)
@@ -75,36 +106,30 @@ public class Companion : MonoBehaviour
         }
     }
 
-    IEnumerator Jump() {
-        yield return new WaitForSeconds(distance / 12f);
-        if (!jumping)
+    IEnumerator Jump(Vector3 playerPos, Vector3 originalPos) {
+        float d = Vector2.Distance(new Vector2(playerPos.x, playerPos.z), new Vector2(originalPos.x, originalPos.z));
+        while (d > Vector2.Distance(new Vector2(transform.position.x, transform.position.z), new Vector2(originalPos.x, originalPos.z)))
         {
-            if (Body.velocity.y < 0) {
-                Body.AddForce(new Vector3(0, 15f + Body.velocity.magnitude, 0), ForceMode.Impulse);
-            }
-            else {
-                Body.AddForce(new Vector3(0, 15f - Body.velocity.magnitude, 0), ForceMode.Impulse);
-            }
-            jumping = true;
-            StartCoroutine(ResetJump());
+            yield return null;
+        }
+        if (isGrounded)
+        {
+            previousJumpPosition = transform.position;
+            Body.AddForce(new Vector3(0, jumpStrength - Body.velocity.y, 0), ForceMode.Impulse);
+            //jumping = true;
+            //StartCoroutine(ResetJump());
         }
     }
 
-    public void PlatformJump() {
-        StartCoroutine(InstantJump());
-    }
-    IEnumerator InstantJump() {
-        Debug.Log("Jump");
-        yield return new WaitForSeconds(distance / 12f);
-        if (Body.velocity.y < 0) {
-            Body.AddForce(new Vector3(0, 15f + Body.velocity.magnitude, 0), ForceMode.Impulse);
-        }
-        else {
-            Body.AddForce(new Vector3(0, 15f - Body.velocity.magnitude, 0), ForceMode.Impulse);
-        }
+    public void PlatformJump(float height, float distance, Vector3 playerpos) {
+        heightOfJump = height;
+        platformJump = true;
+        selfHeightOfJump = transform.position.y;
+        playerJumpDistance = distance;
+        playerPos = playerpos;
     }
     IEnumerator ResetJump() {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.25f);
         jumping = false;
     }
 }

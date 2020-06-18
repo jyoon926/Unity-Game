@@ -9,6 +9,7 @@ public class RigidBodyCharacterController : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     float turnSmoothVelocity;
     public float GroundDistance = 0.2f;
+    public float jumpStrength;
     public LayerMask Ground;
     public Animator animator;
     public Transform camera;
@@ -25,8 +26,11 @@ public class RigidBodyCharacterController : MonoBehaviour
     public Transform platformSpawn;
     public GameObject platform;
     public int platforms = 2;
+    public int energy = 100;
 
     public Companion[] companions;
+
+    private Vector3 previousJumpPosition;
 
     void Start()
     {
@@ -40,6 +44,7 @@ public class RigidBodyCharacterController : MonoBehaviour
         _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground);
         direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
         
+        //Set angle and play animations
         if (Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f) {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + camera.eulerAngles.y;
             angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
@@ -56,28 +61,30 @@ public class RigidBodyCharacterController : MonoBehaviour
             animator.SetBool("isRunning", false);
             audioData.Pause();
         }
+        //Grounded jumping
         if (_isGrounded && Input.GetButtonDown("Jump")) {
-            if (_body.velocity.y < 0) {
-                _body.AddForce(new Vector3(0, _body.velocity.magnitude + 15f, 0), ForceMode.Impulse);
-            }
-            else {
-                _body.AddForce(new Vector3(0, 15f - _body.velocity.magnitude, 0), ForceMode.Impulse);
-            }
+            previousJumpPosition = transform.position;
+            _body.AddForce(new Vector3(0, jumpStrength - _body.velocity.y, 0), ForceMode.Impulse);
         }
-        if (!_isGrounded && Input.GetButtonDown("Jump") && platforms > 0) {
+        //Platform jumping
+        if (!_isGrounded && Input.GetButtonDown("Jump") && platforms > 0 && Vector2.Distance(new Vector2(previousJumpPosition.x, previousJumpPosition.z), new Vector2(transform.position.x, transform.position.z)) > 5f) {
             GameObject clone = (GameObject)Instantiate(platform, new Vector3(platformSpawn.position.x, platformSpawn.position.y, platformSpawn.position.z), Quaternion.identity);
-            CompanionJump();
-            if (_body.velocity.y < 0) {
-                _body.AddForce(new Vector3(0, _body.velocity.magnitude + 15f, 0), ForceMode.Impulse);
-            }
-            else {
-                _body.AddForce(new Vector3(0, 15f - _body.velocity.magnitude, 0), ForceMode.Impulse);
-            }
+            CompanionJump(transform.position.y);
+            previousJumpPosition = transform.position;
+            _body.AddForce(new Vector3(0, jumpStrength - _body.velocity.y, 0), ForceMode.Impulse);
+            Debug.Log("Player: " + (jumpStrength - _body.velocity.y));
             Destroy (clone, 1.0f);
             platforms--;
         }
+        //Rotate player
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+        if (platforms > 10) {
+            platforms = 10;
+        }
     }
+    
+    //Move the player
     private void FixedUpdate() {
         if ((Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f)) {
             Vector3 dir = transform.forward.normalized * Speed * Time.deltaTime;
@@ -85,9 +92,11 @@ public class RigidBodyCharacterController : MonoBehaviour
         }
     }
 
-    private void CompanionJump() {
+    //Make companions jump
+    private void CompanionJump(float height) {
+        float dist = Vector2.Distance(new Vector2(previousJumpPosition.x, previousJumpPosition.z), new Vector2(transform.position.x, transform.position.z));
         for (int i = 0; i < companions.Length; i++) {
-            companions[i].PlatformJump();
+            companions[i].PlatformJump(height, dist, previousJumpPosition);
         }
     }
 }

@@ -9,13 +9,16 @@ public class ConsumableTrigger : MonoBehaviour
     public string type;
     public RigidBodyCharacterController player;
     public GameObject item;
+    public Animator itemAnimator;
     public GameObject parent;
     private void Update() {
         animator.SetBool("In", inside);
         if (inside && Input.GetKeyDown("e")) {
-            if (type.Equals("platform"))
-                player.platforms++;
-            StartCoroutine(Pressed());
+            if (player.platforms < 10) {
+                if (type.Equals("platform"))
+                    player.platforms++;
+                StartCoroutine(Pressed());
+            }
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -31,8 +34,9 @@ public class ConsumableTrigger : MonoBehaviour
 
     IEnumerator Pressed() {
         inside = false;
-        Destroy(item);
+        itemAnimator.SetBool("Disappear", true);
         yield return new WaitForSeconds(0.25f);
+        Destroy(item);
         Destroy(parent);
     }
 }

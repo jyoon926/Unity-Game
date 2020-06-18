@@ -19,13 +19,23 @@ public class LevelLoader : MonoBehaviour
     }
 
     public void LoadNextLevel() {
-        Debug.Log("Enter");
         StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex + 1));
+    }
+
+    public void ReloadLevel() {
+        StartCoroutine(Reload(SceneManager.GetActiveScene().buildIndex));
     }
 
     public void Exit() {
         Debug.Log("Exit");
         Application.Quit();
+    }
+
+    IEnumerator Reload(int index) {
+        transition.SetTrigger("Exit");
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(index);
+		audio.Play("Main Theme");
     }
 
     IEnumerator LoadLevel(int index) {

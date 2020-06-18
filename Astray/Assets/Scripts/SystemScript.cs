@@ -7,6 +7,7 @@ public class SystemScript : MonoBehaviour
 {
     public Animator transition;
     public RigidBodyCharacterController player;
+    public LevelLoader level;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +18,7 @@ public class SystemScript : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown("r")) {
-            StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+            level.ReloadLevel();
         }
     }
 

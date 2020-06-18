@@ -34,12 +34,12 @@ public class PauseMenu : MonoBehaviour
         StartCoroutine(StartFade(audioMixer, "Volume", 0.5f, -80f));
         canvas.alpha = 1;
         canvas.blocksRaycasts = true;
-        Cursor.visible = true;
         Screen.lockCursor = false;
         Cursor.lockState = CursorLockMode.Confined;
         camera.enabled = false;
         playerController.enabled = false;
         pause = true;
+        CursorControl.instance.width = 80f;
     }
     
     public void Resume() {
@@ -47,11 +47,11 @@ public class PauseMenu : MonoBehaviour
         pause = false;
         canvas.alpha = 0;
         canvas.blocksRaycasts = false;
-        Cursor.visible = false;
         Screen.lockCursor = true;
         Cursor.lockState = CursorLockMode.Locked;
         camera.enabled = true;
         playerController.enabled = true;
+        CursorControl.instance.width = 0f;
     }
 
     public IEnumerator StartFade(AudioMixer audioMixer, string exposedParam, float duration, float targetVolume)
