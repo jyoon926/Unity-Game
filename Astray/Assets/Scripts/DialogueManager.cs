@@ -33,7 +33,7 @@ public class DialogueManager : MonoBehaviour
         playerController.enabled = false;
         playerAnimator.SetBool("isRunning", false);
         animator.SetBool("IsOpen", true);
-        Cursor.visible = true;
+        CursorControl.instance.width = 80f;
         Screen.lockCursor = false;
         Cursor.lockState = CursorLockMode.Confined;
 
@@ -75,6 +75,7 @@ public class DialogueManager : MonoBehaviour
         Screen.lockCursor = true;
         Cursor.lockState = CursorLockMode.Locked;
         camera.enabled = true;
+        CursorControl.instance.width = 0f;
         playerController.enabled = true;
     }
 }

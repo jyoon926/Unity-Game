@@ -46,11 +46,11 @@ public class Companion : MonoBehaviour
         //Jump when detects wall
         if (Physics.CheckSphere(WallChecker.position, 0.01f, Ground) && isGrounded) {
             Body.AddForce(new Vector3(0, jumpStrength, 0), ForceMode.Impulse);
-            //StartCoroutine(ResetJump());
         }
 
         //Jump when player jumps
-        if (!playerDialogue.inDialogue && Input.GetButtonDown("Jump") && PlayerController._isGrounded) {
+        if (!playerDialogue.inDialogue && Input.GetButtonDown("Jump") && PlayerController._isGrounded && PlayerController.jumpCount < 2) {
+            PlayerController.ResetJumpCount();
             StartCoroutine(Jump(Player.transform.position, transform.position));
         }
 
@@ -60,27 +60,13 @@ public class Companion : MonoBehaviour
         }
         //Platform Jump
         if (platformJump) {
-            //if (playerJumpDistance > 3.3f) {
-                if (playerJumpDistance - Vector2.Distance(new Vector2(previousJumpPosition.x, previousJumpPosition.z), new Vector2(transform.position.x, transform.position.z)) < 0f) {
-                    //if ((heightOfJump > selfHeightOfJump && heightOfJump > transform.position.y) || (heightOfJump < selfHeightOfJump && heightOfJump > transform.position.y)) {
-                        Body.AddForce(new Vector3(0, jumpStrength - Body.velocity.y, 0f), ForceMode.Impulse);
-                        //this.GetComponent<Rigidbody>().detectCollisions = false;
-                        previousJumpPosition = transform.position;
-                        platformJump = false;
-                    //}
-                }
-            //}
-            //else {
-            //    if (Vector3.Distance(previousJumpPosition, transform.position) > 3f) {
-            //        Body.AddForce(new Vector3(0, jumpStrength - Body.velocity.y, 0f), ForceMode.Impulse);
-            //        //this.GetComponent<Rigidbody>().detectCollisions = false;
-            //        previousJumpPosition = transform.position;
-            //        platformJump = false;
-            //    }
-            //}
+            if (playerJumpDistance - Vector2.Distance(new Vector2(previousJumpPosition.x, previousJumpPosition.z), new Vector2(transform.position.x, transform.position.z)) < 0f) {
+                Body.AddForce(new Vector3(0, jumpStrength - Body.velocity.y, 0f), ForceMode.Impulse);
+                PlayerController.ResetJumpCount();
+                previousJumpPosition = transform.position;
+                platformJump = false;
+            }
         }
-        //if (isGrounded || PlayerController._isGrounded)
-            //this.GetComponent<Rigidbody>().detectCollisions = true;
     }
 
     private void FixedUpdate() {

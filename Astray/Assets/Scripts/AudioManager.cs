@@ -53,5 +53,7 @@ public class AudioManager : MonoBehaviour
 		s.source.outputAudioMixerGroup = s.mixerGroup;
 		s.source.Play();
 	}
-
+	public bool IsPlaying(string sound) {
+		return Array.Find(sounds, item => item.name == sound).source.isPlaying;
+	}
 }

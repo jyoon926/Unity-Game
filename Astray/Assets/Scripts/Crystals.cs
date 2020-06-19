@@ -7,16 +7,19 @@ public class Crystals : MonoBehaviour
 {
     public RigidBodyCharacterController player;
     private int crystals;
-    public GameObject[] images;
+    public RectTransform[] images;
 
     private void Start() {
         for (int i = 0; i < images.Length; i++)
         {
-            images[i].transform.position = new Vector3(images[i].transform.position.x + (50f * i), images[i].transform.position.y, 0f);
+            images[i].anchoredPosition = new Vector3(11f * i, 0f, 0f);
         }
+        Check(player.platforms);
     }
-    private void Update() {
-        crystals = player.platforms;
+    //private void Update() {
+    //}
+    public void Check(int n) {
+        crystals = n;
         for (int i = 0; i < images.Length; i++)
         {
             if (i < crystals) {

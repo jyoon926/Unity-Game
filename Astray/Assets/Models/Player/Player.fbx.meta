@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: 5a2b188a27f93f64da83fd4d343c1d17
 ModelImporter:
-  serializedVersion: 19300
+  serializedVersion: 19301
   internalIDToNameTable:
   - first:
       74: -8945691123924629249
@@ -15,6 +15,12 @@ ModelImporter:
   - first:
       74: -6703194519347915836
     second: Armature|Armature|Armature|Walk|Armature|Walk
+  - first:
+      74: 2535341627481148263
+    second: Armature|Armature|Armature|Armature|Armature|Idle|Armature|Idle|Armature
+  - first:
+      74: -6856343793980612459
+    second: Armature|Armature|Armature|Armature|Armature|Walk|Armature|Walk|Armature
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -55,6 +61,7 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
+    fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
@@ -80,7 +87,13 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips:
+  - fbde531d4252d694e8f1f1484e83baf1
+  - 9b7fd6abae4d3d641993846682dcfb5a
   - 92159c7fa78ae37499b531ac7d23ef43
+  - f4ef371c59bd29d418008b42928edea4
+  - 926624b7131e8104db07c60c6efe5e37
+  - fe07f18a9b9d405418eb16404866fa83
+  - 190b1bb1cfd3ec94aae9355787290d1a
   - f336759bbccf0f94aba756d67465646a
   importAnimation: 1
   humanDescription:

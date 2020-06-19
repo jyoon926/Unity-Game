@@ -1,0 +1,38 @@
+{
+	"$baseURI": "https://yal.cc/r/20/pixelfont/",
+	"$version": "1.0",
+	"in-glyphs": [
+		"ABCDEFGHIJKLMNOPQRSTUVWXY",
+		"Z[\\]^_`abcdefghijklmnopqr",
+		"stuvwxyz{|}~!\"#$%&'()*+,-",
+		"./0123456789:;<=>?@"
+	],
+	"glyph-color": "black",
+	"glyph-width": 16,
+	"glyph-height": 20,
+	"glyph-ofs-x": 0,
+	"glyph-ofs-y": 0,
+	"glyph-sep-x": 0,
+	"glyph-sep-y": 0,
+	"glyph-base-x": 0,
+	"glyph-baseline": 22,
+	"glyph-spacing": 2,
+	"font-is-mono": false,
+	"font-em-square": 1024,
+	"font-line-gap": 0,
+	"font-px-size": 128,
+	"font-ascend": 768,
+	"font-descend": -1792,
+	"font-name": "Helvetica Pixel",
+	"font-author": "Jacob Yoon",
+	"font-copy": "(c)",
+	"font-version": "Version 1.0",
+	"font-desc": "A pixelized version of Helvetica Neue.",
+	"font-license": "You have the permission",
+	"font-license-url": "",
+	"font-sample-text": "Hello!",
+	"font-preview-text": [
+		"Hello, this is a test.",
+		"I really hope this works well."
+	]
+}
