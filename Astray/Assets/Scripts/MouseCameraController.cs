@@ -53,9 +53,9 @@ public class MouseCameraController : MonoBehaviour
         camRotation.x += Input.GetAxis("Mouse Y") * smooth * (-1) * mouseSensitivity;
         camRotation.y += Input.GetAxis("Mouse X") * smooth * mouseSensitivity;
 
-        camRotation.x = Mathf.Clamp(camRotation.x, 10, 60);
-        Target.position = Vector3.Lerp(Target.position, new Vector3(Player.position.x, Player.position.y + 1.5f, Player.position.z), followSpeed * Time.deltaTime);
-        Target.rotation = Quaternion.Lerp(Target.rotation, Quaternion.Euler(35, camRotation.y, camRotation.z), rotationSpeed * Time.deltaTime);
+        camRotation.x = Mathf.Clamp(camRotation.x, 35f, 45f);
+        Target.position = Vector3.Lerp(Target.position, new Vector3(Player.position.x, Player.position.y + 2f, Player.position.z), followSpeed * Time.deltaTime);
+        Target.rotation = Quaternion.Lerp(Target.rotation, Quaternion.Euler(35f, camRotation.y, camRotation.z), rotationSpeed * Time.deltaTime);
         //ViewObstructed();
     }
     

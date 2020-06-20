@@ -18,7 +18,7 @@ public class Companion : MonoBehaviour
     public LayerMask Ground;
     public LayerMask Platform;
     public float jumpStrength;
-    bool jumping = false;
+    private bool jumping = false;
     private int n;
     public InDialogue playerDialogue;
     AudioSource audioData;
@@ -34,6 +34,7 @@ public class Companion : MonoBehaviour
         audioData = GetComponent<AudioSource>();
         audioData.Play(0);
         platformJump = false;
+        jumping = false;
     }
 
     void Update()
@@ -49,8 +50,9 @@ public class Companion : MonoBehaviour
         }
 
         //Jump when player jumps
-        if (!playerDialogue.inDialogue && Input.GetButtonDown("Jump") && PlayerController._isGrounded && PlayerController.jumpCount < 2) {
+        if (!playerDialogue.inDialogue && Input.GetButtonDown("Jump") && PlayerController._isGrounded && !jumping) {
             PlayerController.ResetJumpCount();
+            jumping = true;
             StartCoroutine(Jump(Player.transform.position, transform.position));
         }
 
@@ -102,8 +104,7 @@ public class Companion : MonoBehaviour
         {
             previousJumpPosition = transform.position;
             Body.AddForce(new Vector3(0, jumpStrength - Body.velocity.y, 0), ForceMode.Impulse);
-            //jumping = true;
-            //StartCoroutine(ResetJump());
+            StartCoroutine(ResetJump());
         }
     }
 

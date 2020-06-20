@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
 			s.source.clip = s.clip;
 			s.source.loop = s.loop;
 
-			s.source.outputAudioMixerGroup = mixerGroup;
+			s.source.outputAudioMixerGroup = s.mixerGroup;
 		}
 	}
 
@@ -54,6 +54,9 @@ public class AudioManager : MonoBehaviour
 		s.source.Play();
 	}
 	public bool IsPlaying(string sound) {
-		return Array.Find(sounds, item => item.name == sound).source.isPlaying;
+		Sound s = Array.Find(sounds, item => item.name == sound);
+		
+		return s.source.isPlaying;
+			
 	}
 }

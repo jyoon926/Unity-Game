@@ -105,3 +105,13 @@ MonoBehaviour:
     mixerGroup: {fileID: -7683729020938485297, guid: 67a08f3ab4b02d84aaa3766aea14e10f,
       type: 2}
     source: {fileID: 0}
+  - name: Start
+    clip: {fileID: 8300000, guid: 1e1229c4099c55a4f85730d816f8fece, type: 3}
+    volume: 0.672
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: -7683729020938485297, guid: 67a08f3ab4b02d84aaa3766aea14e10f,
+      type: 2}
+    source: {fileID: 0}

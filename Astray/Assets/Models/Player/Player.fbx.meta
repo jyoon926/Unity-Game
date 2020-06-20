@@ -21,6 +21,12 @@ ModelImporter:
   - first:
       74: -6856343793980612459
     second: Armature|Armature|Armature|Armature|Armature|Walk|Armature|Walk|Armature
+  - first:
+      74: 8879533257966469382
+    second: Armature|Armature|Armature|Armature|Armature|Armature|Armature|Idle|Arma
+  - first:
+      74: -3900824027804924893
+    second: Armature|Armature|Armature|Armature|Armature|Armature|Armature|Walk|Arma
   externalObjects: {}
   materials:
     materialImportMode: 1

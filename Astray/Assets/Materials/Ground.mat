@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Ground
-  m_Shader: {fileID: -6465566751694194690, guid: ee0ea12835787ba4ab217f49ccc899bd,
+  m_Shader: {fileID: -6465566751694194690, guid: b1a44e69ff459a54ba5f240a314d0f7f,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -62,13 +62,13 @@ Material:
     - Vector1_54F20F58: 0.75
     - Vector1_6D0713A: 0
     - Vector1_9EB8EA60: 4
-    - Vector1_A2E4F0FD: 72.3
+    - Vector1_A2E4F0FD: 73.6
     - Vector1_A588F446: 1000
-    - Vector1_CF8B0D8D: 7.15
-    - Vector1_D70F5CA9: 1.05
+    - Vector1_CF8B0D8D: 6.4
+    - Vector1_D70F5CA9: 0.001
     - Vector1_ED5ABFD9: 0
     - Vector1_EDB78066: 0.075
-    - Vector1_F3F6B787: 0.39
+    - Vector1_F3F6B787: 0.15
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -94,7 +94,7 @@ Material:
     m_Colors:
     - Color_12EFA549: {r: 0, g: 0, b: 0, a: 0}
     - Color_189D2842: {r: 0, g: 0, b: 0, a: 0}
-    - Color_28180829: {r: 0.22352941, g: 0.34117648, b: 0.10980392, a: 1}
+    - Color_28180829: {r: 0.5849056, g: 0.4154277, b: 0.38901743, a: 1}
     - Color_57D43A16: {r: 0.6, g: 0.67058825, b: 0.28235292, a: 0}
     - Color_7F7C4F8F: {r: 0.509434, g: 0.509434, b: 0.509434, a: 0}
     - Color_F689E8B9: {r: 0.9245283, g: 0.6391348, b: 0.29218578, a: 1}

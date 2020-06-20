@@ -21,7 +21,7 @@ public class RigidBodyCharacterController : MonoBehaviour
 
     private Vector3 direction;
     public float angle;
-    AudioSource audioData;
+    //AudioSource audioData;
 
     public Transform platformSpawn;
     public GameObject platform;
@@ -34,14 +34,15 @@ public class RigidBodyCharacterController : MonoBehaviour
     private Vector3 previousJumpPosition;
     public int jumpCount;
     public Crystals crystalsController;
-    public AudioManager audioManager;
+    private AudioManager audioManager;
 
     void Start()
     {
         jumpCount = 0;
         _body = GetComponent<Rigidbody>();
-        audioData = GetComponent<AudioSource>();
+        //audioData = GetComponent<AudioSource>();
         //audioData.Play();
+        audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
     }
 
     void Update()
@@ -63,7 +64,7 @@ public class RigidBodyCharacterController : MonoBehaviour
         }
         else {
             animator.SetBool("isRunning", false);
-            audioData.Pause();
+            //audioData.Pause();
         }
         //Grounded jumping
         if (_isGrounded) {
