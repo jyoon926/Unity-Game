@@ -1,0 +1,171 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2810663921722899640
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2810663921722899642}
+  - component: {fileID: 2810663921722899641}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2810663921722899642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2810663921722899640}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 170.61409, y: 121.84689, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2810663921722899641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2810663921722899640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb865f00e1a763f45a188411221e6d2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixerGroup: {fileID: 24300002, guid: 24e9c017774ae3748af5e729e92e54a2, type: 2}
+  mixer: {fileID: 24100000, guid: 24e9c017774ae3748af5e729e92e54a2, type: 2}
+  sounds:
+  - name: Theme 1
+    clip: {fileID: 8300000, guid: 47f982d2a3d06a0468a812405138c1e9, type: 3}
+    volume: 0.674
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 1362221396123303119, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Wind
+    clip: {fileID: 8300000, guid: 965bb477b5929af428a1b13ba008e351, type: 3}
+    volume: 0.7
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Select
+    clip: {fileID: 8300000, guid: 414884f6a9dfe7f4c97b151c4d6626f3, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 0.8
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 3939821632942258180, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Click
+    clip: {fileID: 8300000, guid: 414884f6a9dfe7f4c97b151c4d6626f3, type: 3}
+    volume: 0.35
+    volumeVariance: 0
+    pitch: 0.8
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 3939821632942258180, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Footstep Concrete
+    clip: {fileID: 8300000, guid: 9191fe5c77826eb4da5855cb76b05b30, type: 3}
+    volume: 0.1
+    volumeVariance: 0.3
+    pitch: 1
+    pitchVariance: 0.2
+    loop: 0
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Footstep Grass
+    clip: {fileID: 8300000, guid: 24ced4a3226a31e4fa65873b3338765c, type: 3}
+    volume: 0.1
+    volumeVariance: 0.7
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Splash
+    clip: {fileID: 8300000, guid: c0f640b0ca19ecc4d9da4e96d71ea253, type: 3}
+    volume: 0.393
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Dialogue In
+    clip: {fileID: 8300000, guid: aaffcd637d6f60e47a2210963ad7e006, type: 3}
+    volume: 0.327
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Dialogue Out
+    clip: {fileID: 8300000, guid: 903ef3fc76706fa40843e764c09e45f8, type: 3}
+    volume: 0.327
+    volumeVariance: 0
+    pitch: 0.8
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Footstep Wood
+    clip: {fileID: 8300000, guid: 36d09fbe4b1a6794f88c5afa4d07ed87, type: 3}
+    volume: 0.6
+    volumeVariance: 0.4
+    pitch: 1
+    pitchVariance: 0.2
+    loop: 0
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Jump
+    clip: {fileID: 8300000, guid: c4ccabf85953a75448c85f7b025b8a3a, type: 3}
+    volume: 0.5
+    volumeVariance: 0.4
+    pitch: 1.3
+    pitchVariance: 0.2
+    loop: 0
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  - name: Landing
+    clip: {fileID: 8300000, guid: 4b8ee5a6c2d4cf349afc26b0644c594c, type: 3}
+    volume: 0.5
+    volumeVariance: 0
+    pitch: 0.8
+    pitchVariance: 0
+    loop: 0
+    mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
+  musicVolume: 0
+  soundVolume: 0
+  fullscreen: 0
