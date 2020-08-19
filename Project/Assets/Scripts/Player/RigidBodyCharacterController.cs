@@ -32,112 +32,143 @@ public class RigidBodyCharacterController : MonoBehaviour
     public bool falling = false;
     public bool AirControl;
     public float delay;
+    public bool canControl;
+    public bool learnedToSprint;
+    public bool learnedToJump;
+    float stopwatch;
+    public bool foundRoad;
+    public ConversationManager conversationManager;
+    public Conversation lostAtStart;
     void Start()
     {
+        stopwatch = 0f;
+        learnedToSprint = false;
+        learnedToJump= false;
         _body = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
-        transform.rotation = Quaternion.Euler(0f, startAngle, 0f);
+        //transform.rotation = Quaternion.Euler(0f, startAngle, 0f);
         dust.Play();
+        canControl = true;
     }
 
     void Update()
     {
-        _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground);
-        _againstWall = Physics.CheckSphere(_wallChecker.position, 0.4f, Ground);
-        direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
-        //Set angle and play animations
-        if (!AirControl) {
-            if (_isGrounded || _againstWall) {
+        if (!foundRoad)
+            stopwatch += Time.deltaTime;
+        if (stopwatch > 60f && !foundRoad && 
+        !conversationManager.start) {
+            conversationManager.StartDialogue(lostAtStart, 0f);
+            foundRoad = true;
+        }
+        if (canControl) {
+            _isGrounded = Physics.CheckSphere(_groundChecker.position, GroundDistance, Ground);
+            _againstWall = Physics.CheckSphere(_wallChecker.position, 0.4f, Ground);
+            direction = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical")).normalized;
+            //Set angle and play animations
+            if (!AirControl) {
+                if (_isGrounded || _againstWall) {
+                    if (transform.position.y > -5 && (Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f)) {
+                        float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.eulerAngles.y;
+                        angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
+                    }
+                }
+            }
+            else {
                 if (transform.position.y > -5 && (Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f)) {
                     float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.eulerAngles.y;
                     angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
                 }
             }
-        }
-        else {
-            if (transform.position.y > -5 && (Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f)) {
-                float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + _camera.eulerAngles.y;
-                angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
-            }
-        }
-        if (CanJump) {
-            //Grounded jumping
-            if (_isGrounded) {
-                anim.SetBool("jumping", false);
-                if (Input.GetButtonDown("Jump")) {
-                    FindObjectOfType<AudioManager>().Play("Jump");
-                    _body.AddForce(new Vector3(0, jumpStrength - _body.velocity.y, 0), ForceMode.Impulse);
-                    falling = true;
+            if (CanJump) {
+                //Grounded jumping
+                if (_isGrounded) {
+                    anim.SetBool("jumping", false);
+                    if (Input.GetButtonDown("Jump")) {
+                        if (!learnedToJump)
+                            learnedToJump = true;
+                        FindObjectOfType<AudioManager>().Play("Jump");
+                        _body.AddForce(new Vector3(0, jumpStrength - _body.velocity.y, 0), ForceMode.Impulse);
+                        falling = true;
+                    }
+                }
+                else {
+                    anim.SetBool("jumping", true);
                 }
             }
-            else {
-                anim.SetBool("jumping", true);
-            }
-        }
-        //Rotate player
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
-        
-        if (transform.position.y > -5 && ((Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f))) {
-            RaycastHit hit;
-            if (Physics.Raycast(new Vector3(_groundChecker.position.x, _groundChecker.position.y + 0.1f, _groundChecker.position.z), Vector3.down, out hit)) {
-                if (hit.collider.gameObject.tag == "Grass") {
-                    groundMaterial = "Grass";
+            //Rotate player
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            
+            if (transform.position.y > -5 && ((Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f))) {
+                RaycastHit hit;
+                if (Physics.Raycast(new Vector3(_groundChecker.position.x, _groundChecker.position.y + 0.1f, _groundChecker.position.z), Vector3.down, out hit)) {
+                    if (hit.collider.gameObject.tag == "Grass") {
+                        groundMaterial = "Grass";
+                    }
+                    else if (hit.collider.gameObject.tag == "Concrete")
+                    {
+                        groundMaterial = "Concrete";
+                    }
+                    else if (hit.collider.gameObject.tag == "Wood")
+                    {
+                        groundMaterial = "Wood";
+                    }
                 }
-                else if (hit.collider.gameObject.tag == "Concrete")
-                {
-                    groundMaterial = "Concrete";
+                if (Input.GetKey(KeyCode.LeftShift)) {
+                    if (!learnedToSprint)
+                        learnedToSprint = true;
+                    if (Speed < 10f) {
+                        Speed += 0.1f;
+                    }
+                    if (Speed > 9.5f)
+                        Speed = 10f;
+                    anim.SetBool("running", true);
+                    if (_isGrounded)
+                        dustPlay = true;
+                    else
+                        dustPlay = false;
                 }
-                else if (hit.collider.gameObject.tag == "Wood")
-                {
-                    groundMaterial = "Wood";
-                }
-            }
-            if (Input.GetKey(KeyCode.LeftShift)) {
-                if (Speed < 10f) {
-                    Speed += 0.1f;
-                }
-                if (Speed > 9.5f)
-                    Speed = 10f;
-                anim.SetBool("running", true);
-                if (_isGrounded)
-                    dustPlay = true;
-                else
+                if (!Input.GetKey(KeyCode.LeftShift)) {
                     dustPlay = false;
+                    if (Speed > 4f) {
+                        Speed -= 0.1f;
+                    }
+                    if (Speed < 4.5f)
+                        Speed = 4f;
+                    anim.SetBool("running", false);
+                }
+                time += Time.deltaTime;
+                Footstep();
             }
-            if (!Input.GetKey(KeyCode.LeftShift)) {
+            else if (Mathf.Abs(direction.x) == 0 || Mathf.Abs(direction.z) == 0f) {
                 dustPlay = false;
+                time = delay;
                 if (Speed > 4f) {
                     Speed -= 0.1f;
                 }
                 if (Speed < 4.5f)
                     Speed = 4f;
-                anim.SetBool("running", false);
             }
-            time += Time.deltaTime;
-            Footstep();
+            
+            delay = Mathf.Clamp((Mathf.Clamp(Speed - 4f, 0f, 6f) / 6f) * -1f + 1f, 0f, 1f);
         }
-        else if (Mathf.Abs(direction.x) == 0 || Mathf.Abs(direction.z) == 0f) {
-            dustPlay = false;
-            time = delay;
-            if (Speed > 4f) {
-                Speed -= 0.1f;
-            }
-            if (Speed < 4.5f)
-                Speed = 4f;
+        else {
+            anim.SetBool("walking", false);
+            anim.SetBool("running", false);
+            anim.SetBool("jumping", false);
         }
-        
-        delay = Mathf.Clamp((Mathf.Clamp(Speed - 4f, 0f, 6f) / 6f) * -1f + 1f, 0f, 1f);
     }
 
     //Move the player
     private void FixedUpdate() {
-        if (transform.position.y > -5 && ((Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f))) {
-            Vector3 dir = transform.forward.normalized * Speed * Time.deltaTime;
-            _body.MovePosition(transform.position + dir);
-            anim.SetBool("walking", true);
-        }
-        else {
-            anim.SetBool("walking", false);
+        if (canControl) {
+            if (transform.position.y > -5 && ((Mathf.Abs(direction.x) > 0 || Mathf.Abs(direction.z) > 0f))) {
+                Vector3 dir = transform.forward.normalized * Speed * Time.deltaTime;
+                _body.MovePosition(transform.position + dir);
+                anim.SetBool("walking", true);
+            }
+            else {
+                anim.SetBool("walking", false);
+            }
         }
         if (dustPlay) {
             if(!dust.isPlaying) {
@@ -186,5 +217,8 @@ public class RigidBodyCharacterController : MonoBehaviour
             }
             dust.Play();
         }
+    }
+    public void FoundRoad() {
+        foundRoad = true;
     }
 }

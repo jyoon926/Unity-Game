@@ -20,6 +20,8 @@ public class MouseCameraController : MonoBehaviour
     public float maxDistance;
     public float wallDistance;
     public float angle;
+    public float height = 2f;
+    public bool mouseControl;
     
     //Vector3 dollyDir;
     //private Vector3 dollyDirAdjusted;
@@ -29,17 +31,21 @@ public class MouseCameraController : MonoBehaviour
     {
         //camRotation = transform.localRotation;
         //offset = transform.localPosition;
+        //mouseControl = false;
+        //Target.rotation = Quaternion.Euler(angle, 0, 0);
     }
 
     // Update is called once per frame
     void LateUpdate()
     {
         //camRotation.x += Input.GetAxis("Mouse Y") * smooth * (-1) * mouseSensitivity;
-        camRotation.y += Input.GetAxis("Mouse X") * smooth * mouseSensitivity;
-
+        if (mouseControl) {
+            camRotation.y += Input.GetAxis("Mouse X") * smooth * mouseSensitivity;
+        }
         //camRotation.x = Mathf.Clamp(camRotation.x, 35f, 45f);
-        Target.position = Vector3.Lerp(Target.position, new Vector3(Player.position.x, Player.position.y + 2f, Player.position.z), followSpeed * Time.deltaTime);
+        Target.position = Vector3.Lerp(Target.position, new Vector3(Player.position.x, Player.position.y + height, Player.position.z), followSpeed * Time.deltaTime);
         Target.rotation = Quaternion.Lerp(Target.rotation, Quaternion.Euler(angle, camRotation.y, camRotation.z), rotationSpeed * Time.deltaTime);
+        transform.localPosition = new Vector3(0,0,-distance);
         //Target.rotation = Quaternion.Euler(angle, camRotation.y, camRotation.z);
         //ViewObstructed();
     }
@@ -56,5 +62,8 @@ public class MouseCameraController : MonoBehaviour
         }
         transform.localPosition = dollyDir * distance;
     }*/
-    
+    IEnumerator Control() {
+        yield return new WaitForSeconds(1f);
+        mouseControl = false;
+    }
 }

@@ -8,14 +8,11 @@ public class Startup : MonoBehaviour {
     
     void Start()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 1) {
-            if (!FindObjectOfType<AudioManager>().IsPlaying("Theme 1")) {
-                FindObjectOfType<AudioManager>().Play("Theme 1");
-            }
+        //if (SceneManager.GetActiveScene().buildIndex == 1) {
             if (!FindObjectOfType<AudioManager>().IsPlaying("Wind")) {
                 FindObjectOfType<AudioManager>().Play("Wind");
             }
-        }
+        //}
     }
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Period)) {

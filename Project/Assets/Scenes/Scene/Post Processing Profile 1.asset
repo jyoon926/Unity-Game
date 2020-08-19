@@ -107,6 +107,45 @@ MonoBehaviour:
   rounded:
     m_OverrideState: 0
     m_Value: 0
+--- !u!114 &-3340701817992017673
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 558a8e2b6826cf840aae193990ba9f2e, type: 3}
+  m_Name: ShadowsMidtonesHighlights
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  shadows:
+    m_OverrideState: 1
+    m_Value: {x: 0.8158452, y: 0.82609856, z: 1, w: -0.09345794}
+  midtones:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.95546526, z: 0.9554652, w: -0.11214953}
+  highlights:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.98507667, z: 0.9512482, w: 0.020796137}
+  shadowsStart:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  shadowsEnd:
+    m_OverrideState: 0
+    m_Value: 0.3
+    min: 0
+  highlightsStart:
+    m_OverrideState: 0
+    m_Value: 0.55
+    min: 0
+  highlightsEnd:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
 --- !u!114 &-3112018371072827589
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -119,11 +158,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2db86121404754db890f4c8dfe81b2, type: 3}
   m_Name: Bloom
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   m_AdvancedMode: 0
   threshold:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0.9
     min: 0
   intensity:
     m_OverrideState: 1
@@ -166,7 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81180773991d8724ab7f2d216912b564, type: 3}
   m_Name: ChromaticAberration
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
@@ -193,6 +232,7 @@ MonoBehaviour:
   - {fileID: -3112018371072827589}
   - {fileID: -8172919627562988617}
   - {fileID: -8584575307673765296}
+  - {fileID: -3340701817992017673}
 --- !u!114 &8859822588648573004
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -209,7 +249,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   postExposure:
     m_OverrideState: 1
-    m_Value: 0.8
+    m_Value: 0.4
   contrast:
     m_OverrideState: 1
     m_Value: 40

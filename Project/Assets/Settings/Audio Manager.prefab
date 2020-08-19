@@ -47,8 +47,9 @@ MonoBehaviour:
   mixer: {fileID: 24100000, guid: 24e9c017774ae3748af5e729e92e54a2, type: 2}
   sounds:
   - name: Theme 1
+    isMusic: 1
     clip: {fileID: 8300000, guid: 47f982d2a3d06a0468a812405138c1e9, type: 3}
-    volume: 0.674
+    volume: 0
     volumeVariance: 0
     pitch: 1
     pitchVariance: 0
@@ -57,6 +58,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Wind
+    isMusic: 0
     clip: {fileID: 8300000, guid: 965bb477b5929af428a1b13ba008e351, type: 3}
     volume: 0.7
     volumeVariance: 0
@@ -67,6 +69,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Select
+    isMusic: 0
     clip: {fileID: 8300000, guid: 414884f6a9dfe7f4c97b151c4d6626f3, type: 3}
     volume: 0.35
     volumeVariance: 0
@@ -77,6 +80,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Click
+    isMusic: 0
     clip: {fileID: 8300000, guid: 414884f6a9dfe7f4c97b151c4d6626f3, type: 3}
     volume: 0.35
     volumeVariance: 0
@@ -87,6 +91,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Footstep Concrete
+    isMusic: 0
     clip: {fileID: 8300000, guid: 9191fe5c77826eb4da5855cb76b05b30, type: 3}
     volume: 0.1
     volumeVariance: 0.3
@@ -97,6 +102,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Footstep Grass
+    isMusic: 0
     clip: {fileID: 8300000, guid: 24ced4a3226a31e4fa65873b3338765c, type: 3}
     volume: 0.1
     volumeVariance: 0.7
@@ -107,6 +113,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Splash
+    isMusic: 0
     clip: {fileID: 8300000, guid: c0f640b0ca19ecc4d9da4e96d71ea253, type: 3}
     volume: 0.393
     volumeVariance: 0
@@ -117,6 +124,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Dialogue In
+    isMusic: 0
     clip: {fileID: 8300000, guid: aaffcd637d6f60e47a2210963ad7e006, type: 3}
     volume: 0.327
     volumeVariance: 0
@@ -127,6 +135,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Dialogue Out
+    isMusic: 0
     clip: {fileID: 8300000, guid: 903ef3fc76706fa40843e764c09e45f8, type: 3}
     volume: 0.327
     volumeVariance: 0
@@ -137,6 +146,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Footstep Wood
+    isMusic: 0
     clip: {fileID: 8300000, guid: 36d09fbe4b1a6794f88c5afa4d07ed87, type: 3}
     volume: 0.6
     volumeVariance: 0.4
@@ -147,6 +157,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Jump
+    isMusic: 0
     clip: {fileID: 8300000, guid: c4ccabf85953a75448c85f7b025b8a3a, type: 3}
     volume: 0.5
     volumeVariance: 0.4
@@ -157,6 +168,7 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: Landing
+    isMusic: 0
     clip: {fileID: 8300000, guid: 4b8ee5a6c2d4cf349afc26b0644c594c, type: 3}
     volume: 0.5
     volumeVariance: 0
@@ -166,6 +178,19 @@ MonoBehaviour:
     mixerGroup: {fileID: 1839144783484975039, guid: 24e9c017774ae3748af5e729e92e54a2,
       type: 2}
     source: {fileID: 0}
+  - name: Theme 2
+    isMusic: 1
+    clip: {fileID: 8300000, guid: e0d4b98361ff9ea48ac375c1020e6fa7, type: 3}
+    volume: 0.674
+    volumeVariance: 0
+    pitch: 1
+    pitchVariance: 0
+    loop: 1
+    mixerGroup: {fileID: 1362221396123303119, guid: 24e9c017774ae3748af5e729e92e54a2,
+      type: 2}
+    source: {fileID: 0}
   musicVolume: 0
   soundVolume: 0
+  currentSong: 
+  currentSource: {fileID: 0}
   fullscreen: 0

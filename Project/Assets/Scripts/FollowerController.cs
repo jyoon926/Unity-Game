@@ -23,6 +23,8 @@ public class FollowerController : MonoBehaviour
     public float jumpStrength;
     private bool jumping = false;
     private int n;
+    public ExclamationMarkPosition exclamationMark;
+    public ConversationManager conversationManager;
 
     void Start()
     {
@@ -41,6 +43,12 @@ public class FollowerController : MonoBehaviour
         float targetAngle = Mathf.Atan2(Player.transform.position.z - transform.position.z, Player.transform.position.x - transform.position.x) * 180 / Mathf.PI;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, -1 * targetAngle + 90, ref turnSmoothVelocity, turnSmoothTime);
         distance = Vector2.Distance(new Vector2(Player.transform.position.x, Player.transform.position.z), new Vector2(transform.position.x, transform.position.z));
+        if (distance > 10f) {
+            exclamationMark.opacity = 1;
+        }
+        else if (distance < 5f) {
+            exclamationMark.opacity = 0;
+        }
 
         if (PlayerController.CanJump) {
             //Jump when player jumps

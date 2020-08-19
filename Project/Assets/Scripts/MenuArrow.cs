@@ -78,5 +78,7 @@ public class MenuArrow : MonoBehaviour
         levelLoader.LoadLevel();
         yield return new WaitForSeconds(1f);
         instructions.SetBool("In", false);
+        FindObjectOfType<AudioManager>().FadeMusic("Theme 2", 2f);
+        FindObjectOfType<AudioManager>().Play("Wind");
     }
 }

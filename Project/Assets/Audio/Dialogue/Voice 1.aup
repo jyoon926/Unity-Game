@@ -1,0 +1,38 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="Voice 1_data" version="1.3.0" audacityversion="2.3.3" sel0="3.0001971429" sel1="3.0001971429" vpos="0" h="2.7858274286" zoom="1021.5995329824" rate="48000.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="Full" isSelected="1" height="150" minimized="0" channel="0" linked="1" mute="0" solo="0" rate="48000" gain="1.995262" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="219252">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808049.au" len="219252" min="-0.051991" max="0.050532" rms="0.008436"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Full" isSelected="1" height="150" minimized="0" channel="1" linked="0" mute="0" solo="0" rate="48000" gain="1.995262" pan="0.0" colorindex="0">
+		<waveclip offset="0.00000000" colorindex="0">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="219252">
+				<waveblock start="0">
+					<simpleblockfile filename="e0808681.au" len="219252" min="-0.035098" max="0.035082" rms="0.005522"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<labeltrack name="Label Track" isSelected="0" height="73" minimized="0" numlabels="11">
+		<label t="0.2593971429" t1="0.3549988571" title="0"/>
+		<label t="0.5490165000" t1="0.6593010714" title="1"/>
+		<label t="0.9082570714" t1="1.0002696429" title="2"/>
+		<label t="1.2792439286" t1="1.4854565000" title="3"/>
+		<label t="1.7081057143" t1="1.8901731429" title="4"/>
+		<label t="2.1769782857" t1="2.3153234286" title="5"/>
+		<label t="2.5929925714" t1="2.7300325714" title="6"/>
+		<label t="3.0109645714" t1="3.1356057143" title="8"/>
+		<label t="3.5326954286" t1="3.6612520000" title="9"/>
+		<label t="3.9493622857" t1="4.0916228571" title="10"/>
+		<label t="4.3715760000" t1="4.5484228572" title="11"/>
+	</labeltrack>
+</project>

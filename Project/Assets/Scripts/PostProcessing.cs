@@ -39,7 +39,7 @@ public class PostProcessing : MonoBehaviour
         filmGrain.intensity.Override(sorrow * 0.5f + 0.25f);
         colorAdjustments.contrast.Override(40f + sorrow * -40f);
         colorAdjustments.saturation.Override(sorrow * -60f - 10f);
-        colorAdjustments.postExposure.Override(sorrow * 0.4f + 0.8f);
+        colorAdjustments.postExposure.Override(sorrow * 0.4f + 0.75f);
         whiteBalance.temperature.Override(sorrow * 90f - 10f);
     }
 

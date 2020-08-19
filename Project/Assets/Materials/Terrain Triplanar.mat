@@ -127,9 +127,9 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_354D1C7B: 0.009
-    - Vector1_38BD3441: 0.83
-    - Vector1_A2E4F0FD: 75.4
-    - Vector1_CF8B0D8D: 6.09
+    - Vector1_38BD3441: 1
+    - Vector1_A2E4F0FD: 76.6
+    - Vector1_CF8B0D8D: 5.56
     - Vector1_D70F5CA9: 2
     - Vector1_ED5ABFD9: 0
     - Vector1_F3F6B787: 0.06
@@ -151,7 +151,7 @@ Material:
     - _Metallic1: 0
     - _Metallic2: 0
     - _Metallic3: 0
-    - _NumLayersCount: 2
+    - _NumLayersCount: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
